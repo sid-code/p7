@@ -28,7 +28,6 @@ int psprng_getbyte(PSprng *prng) {
   return r;
 }
 
-#define REPORT_INTERVAL 10000000
 double monte_carlo(PSprng *prng, int throws) {
   int hits = 0, i;
   for (i = 0; i < throws; i++) {
