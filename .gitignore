@@ -3,6 +3,8 @@
 !*/
 
 data
+script
 *.rb
 *.o
+.*.swp
 
