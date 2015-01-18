@@ -52,23 +52,4 @@ void psprng_write_to_file(PSprng *prng, FILE *fp) {
     fwrite(&num, 1, 1, fp);
   }
 }
-
-// int main() {
-// 
-// //   int throws = 100000000;
-// // #define START 1.08
-// // #define END   1.09
-// // #define STEP  0.001
-// // 
-// //   double seed;
-// //   for (seed = START; seed < END; seed += STEP) {
-// //     PSprng prng = psprng_create(seed);
-// //     printf("(s=%.8f) Monte Carlo value of pi with %d throws:\n", seed, throws);
-// //     printf("   %.8f\n", monte_carlo(&prng, throws));
-// //   }
-// 
-//   PSprng prng = psprng_create(1.08);
-//   printf("%.8f\n", monte_carlo(&prng, 1000000000));
-// 
-//   return 0;
-// }
+ 
