@@ -6,19 +6,19 @@
 struct mc_task {
   double seed;
   int throws;
-  volatile int *finished;
 };
 
 void *monte_carlo_large(void *void_task_ptr) {
   struct mc_task *task = (struct mc_task *) void_task_ptr;
   PSprng prng = psprng_create(task->seed);
   printf("s=%.8f, %.8f\n", task->seed, monte_carlo(&prng, task->throws));
-  *task->finished++;
   free(task);
 
   return NULL;
 
 }
+
+volatile int finished;
 
 int main() {
 
@@ -29,21 +29,26 @@ int main() {
 #define STEP  0.01
 
   int num_threads = (END - START) / STEP;
-  volatile int finished = 0;
+  pthread_t mc_threads[num_threads];
+  int index = 0;
 
   double seed;
 
-  for (seed = START; seed < END; seed += STEP) {
+
+  for (seed = START; seed < END; seed += STEP, index++) {
     struct mc_task *task = malloc(sizeof(struct mc_task));
     task->seed = seed;
     task->throws = THROWS;
-    task->finished = &finished;
 
     pthread_t mc_thread;
     pthread_create(&mc_thread, NULL, monte_carlo_large, task);
+    mc_threads[index] = mc_thread;
   }
 
-  while (finished < num_threads);
+  for (index = 0; index < num_threads; index++) {
+    pthread_join(mc_threads[index], NULL);
+  }
+
 
   printf("Finished %d threads.\n", num_threads);
 
