@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
   }
 
   PSprng prng = psprng_create(seed);
-  double result = monte_carlo(&prng, 1000000000);
+  double result = monte_carlo(&prng, 10000000000);
   printf("%0.8f\n", result);
 
   return 0;

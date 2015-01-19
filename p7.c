@@ -28,8 +28,8 @@ int psprng_getbyte(PSprng *prng) {
   return r;
 }
 
-double monte_carlo(PSprng *prng, int throws) {
-  int hits = 0, i;
+double monte_carlo(PSprng *prng, long long throws) {
+  long long hits = 0, i;
   for (i = 0; i < throws; i++) {
     double x = psprng_emit(prng);
     double y = psprng_emit(prng);
@@ -37,7 +37,7 @@ double monte_carlo(PSprng *prng, int throws) {
     if (x * x + y * y < 1) hits++;
 #ifdef REPORT_INTERVAL
     if (i % REPORT_INTERVAL == 1) {
-      printf("round %d, approx=%0.8f\n", i, ((double) hits) / i * 4);
+      printf("round %lld, approx=%0.8f\n", i, ((double) hits) / i * 4);
     }
 #endif
   }

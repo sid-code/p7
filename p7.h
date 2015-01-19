@@ -13,6 +13,6 @@ double psprng_emit_raw(PSprng *prng);
 double psprng_emit(PSprng *prng);
 int psprng_getbit(PSprng *prng);
 int psprng_getbyte(PSprng *prng);
-double monte_carlo(PSprng *prng, int throws);
+double monte_carlo(PSprng *prng, long long throws);
 void psprng_write_to_file(PSprng *prng, FILE *fp);
 #endif
