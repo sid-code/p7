@@ -5,7 +5,7 @@
 
 struct mc_task {
   double seed;
-  int throws;
+  long long throws;
 };
 
 void *monte_carlo_large(void *void_task_ptr) {
